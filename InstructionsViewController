@@ -1,0 +1,13 @@
+import UIKit
+
+class InstructionsViewController: UIViewController {
+
+@IBAction func mapButton(_ sender: UIButton) {
+  self.performSegue(withIdentifier: "mapSegue", sender: self)
+}
+
+override func viewDidLoad() {
+  super.viewDidLoad()
+  // Do any additional setup after loading the view.
+}
+}
