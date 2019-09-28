@@ -1,0 +1,30 @@
+import UIKit
+import MapKit
+
+class TheMapPageViewController: UIViewController {
+
+@IBOutlet weak var theMapKitView: MKMapView!
+ 
+override func viewDidLoad() {
+  super.viewDidLoad()
+  // Do any additional setup after loading the view.
+        
+  let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+  let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(40.119738, -88.243348)
+  let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+  theMapKitView.setRegion(region, animated: true)     
+  let annotation = MKPointAnnotation()      
+  annotation.coordinate = location
+  annotation.title = "Neil & Washington Lot"
+  theMapKitView.addAnnotation(annotation)
+}
+
+    
+@IBAction func backToInstructions(_ sender: UIButton) {
+  dismiss(animated: true, completion: nil)
+}
+    
+@IBAction func googlePageButton(_ sender: UIButton) {
+  self.performSegue(withIdentifier: "googlePageSegue", sender: self)
+}   
+}
