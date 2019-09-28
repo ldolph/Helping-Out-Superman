@@ -1,0 +1,42 @@
+import UIKit
+import WebKit
+
+class GooglePageViewController: UIViewController {
+
+  @IBOutlet weak var web: WKWebView!
+ 
+  override func viewDidLoad() {
+  super.viewDidLoad()
+  //Do any additional setup after loading the view.
+    web.allowsBackForwardNavigationGestures = true
+    let refresh = UIRefreshControl()
+    refresh.addTarget(self, action: #selector(refreshModule(sender: )), for: UIControl.Event.valueChanged)
+    web.scrollView.bounces = true
+    web.scrollView.addSubview(refresh)
+    let url = URL(string: "https://www.google.com")
+    let request = URLRequest(url: url!)
+    web.load(request)
+}
+
+  @IBAction func backButton(_ sender: UIButton) {
+    web.goBack()
+}
+
+  @IBAction func reloadButton(_ sender: UIButton) {
+    web.reload()
+}
+
+  @IBAction func fowardButton(_ sender: UIButton) {
+    web.goForward()
+}
+
+  @IBAction func backToMapPage(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+}
+
+
+    @objc func refreshModule(sender: UIRefreshControl) {
+      web.reload()
+      sender.endRefreshing()
+}
+}
